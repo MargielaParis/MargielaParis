@@ -9,6 +9,12 @@
   <img src="https://img.shields.io/badge/Model_Compression-7c3aed?style=flat-square" alt="Model Compression" />
 </p>
 
+<p align="center">
+  <a href="https://opposite-mailbox-7dd.notion.site/35f596b990b780b6b0dde30fc67610fe">Portfolio</a>
+  ·
+  <a href="mailto:kiyeon9610@gmail.com">Email</a>
+</p>
+
 ## Profile
 
 I am a machine learning researcher focused on **representation learning** and
@@ -18,8 +24,18 @@ and low-bit model inference.
 
 - **M.S. in Computer Science**, Kookmin University
 - First-author research on region-aware meteorological satellite retrieval
+- Second-author research on 2-bit post-training quantization for LLMs
 - Research interests: image embeddings, self-supervised learning, model
   compression, and efficient inference
+
+## Experience & Education
+
+| Period | Organization | Role |
+|---|---|---|
+| **Jul 14, 2026 – Dec 18, 2026** | **SKALA** | Participant in hands-on software engineering and AI training, including front-end systems and Transformer/LLM experiments |
+| Aug 2023 – Feb 2026 | **Data Mining Lab, Kookmin University** | Undergraduate researcher, then M.S. researcher; worked on satellite-image retrieval and LLM quantization |
+| Mar 2024 – Feb 2026 | **Kookmin University** | M.S. in Computer Science · GPA 4.39/4.50 |
+| Mar 2016 – Feb 2024 | **Kookmin University** | B.A. in Political Science & Diplomacy and B.S. in Computer Science (double major) |
 
 ## Research
 
@@ -27,7 +43,7 @@ and low-bit model inference.
   <tr>
     <td width="50%" valign="top">
       <h3>Region-aware satellite retrieval</h3>
-      <p><sub>FIRST-AUTHOR RESEARCH</sub></p>
+      <p><sub>FIRST AUTHOR · IEEE TNNLS UNDER REVIEW</sub></p>
       <p>
         A retrieval framework that encodes a full satellite image once,
         preserves a compact patch grid, and reuses arbitrary subsets for
@@ -41,16 +57,16 @@ and low-bit model inference.
       </p>
     </td>
     <td width="50%" valign="top">
-      <h3>Compact neural representations</h3>
-      <p><sub>ONGOING RESEARCH</sub></p>
+      <h3>EPTQ: 2-bit LLM quantization</h3>
+      <p><sub>SECOND AUTHOR · ICML UNDER REVIEW</sub></p>
       <p>
-        Exploring low-bit post-training quantization and representation
-        compression for accurate, storage-efficient, and practical neural
-        inference.
+        A post-training quantization framework that combines a scale-aware
+        E8 lattice with zero-overhead critical-weight preservation to improve
+        2-bit LLM compression.
       </p>
       <p>
         <code>2-bit PTQ</code>
-        <code>Vector quantization</code>
+        <code>E8 lattice</code>
         <code>LLM inference</code>
         <code>Model compression</code>
       </p>
@@ -64,17 +80,25 @@ and low-bit model inference.
 |---|---|---|
 | [**KBO Schedule API**](https://github.com/MargielaParis/Doosan-Schedule) | Automated collection and delivery of structured game schedules through a weekly GitHub Actions workflow and GitHub Pages | Python, JSON, GitHub Actions |
 | [**Front-end Systems Lab**](https://github.com/MargielaParis/skala-front) | A responsive vanilla web portal with modular weather API integration, interactive utilities, and progressive HTML/CSS/JavaScript exercises | HTML, CSS, JavaScript, Open-Meteo |
+| **Network security monitoring** | A four-person project combining graph-based features with deep learning for packet security monitoring | Python, PyTorch, PageRank, RWR |
 
 ## Toolkit
 
 **Research**
 
-Python · PyTorch · NumPy · scikit-learn · Vision Transformers · LoRA ·
-contrastive learning · retrieval evaluation
+Python · R · PyTorch · TensorFlow · NumPy · Pandas · scikit-learn ·
+Hugging Face · Vision Transformers · LoRA · GNN · contrastive learning ·
+2-bit PTQ · retrieval evaluation
 
 **Engineering**
 
-Git · GitHub Actions · Linux · LaTeX · HTML · CSS · JavaScript · REST/JSON APIs
+Git · GitHub Actions · Linux · LaTeX · HTML · CSS · JavaScript · TypeScript ·
+REST/JSON APIs
+
+## Languages & Credentials
+
+- **OPIc IH** — May 2026
+- **TOEIC 915** — November 2023
 
 ## Working principles
 
