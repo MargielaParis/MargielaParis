@@ -10,8 +10,6 @@
 </p>
 
 <p align="center">
-  <a href="https://opposite-mailbox-7dd.notion.site/35f596b990b780b6b0dde30fc67610fe">Portfolio</a>
-  ·
   <a href="mailto:kiyeon9610@gmail.com">Email</a>
 </p>
 
