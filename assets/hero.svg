@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
-  <title id="title">Ki-Yeon Park, Machine Learning Researcher</title>
-  <desc id="desc">A dark blue professional banner with a patch-grid diagram representing compact region-aware embeddings.</desc>
+  <title id="title">Ki-Yeon Park, Machine Learning Researcher and AI Engineer</title>
+  <desc id="desc">A dark blue banner with a patch-grid diagram for region-aware embeddings and a lattice diagram for 2-bit quantization.</desc>
 
   <defs>
     <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
@@ -16,11 +16,15 @@
       <stop offset="0" stop-color="#2dd4bf" stop-opacity="0.92"/>
       <stop offset="1" stop-color="#3b82f6" stop-opacity="0.92"/>
     </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#60a5fa"/>
+    </linearGradient>
     <pattern id="microGrid" width="32" height="32" patternUnits="userSpaceOnUse">
       <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#93c5fd" stroke-opacity="0.055" stroke-width="1"/>
     </pattern>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feGaussianBlur stdDeviation="6" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -32,58 +36,102 @@
   <rect width="1200" height="360" rx="24" fill="url(#microGrid)"/>
   <circle cx="1050" cy="30" r="270" fill="#2563eb" fill-opacity="0.08"/>
   <circle cx="1110" cy="350" r="230" fill="#14b8a6" fill-opacity="0.07"/>
+  <circle cx="620" cy="400" r="200" fill="#7c3aed" fill-opacity="0.05"/>
 
   <g font-family="Inter, Segoe UI, Arial, sans-serif">
-    <g transform="translate(72 63)">
-      <rect width="370" height="32" rx="16" fill="#0f2a43" stroke="#5eead4" stroke-opacity="0.32"/>
+    <g transform="translate(72 56)">
+      <rect width="300" height="32" rx="16" fill="#0f2a43" stroke="#5eead4" stroke-opacity="0.32"/>
       <circle cx="18" cy="16" r="4" fill="#5eead4"/>
       <text x="32" y="21" fill="#a7f3d0" font-size="13" font-weight="700" letter-spacing="1.2">ML RESEARCH · EFFICIENT AI</text>
     </g>
-
-    <text x="70" y="168" fill="#f8fafc" font-size="58" font-weight="700">Ki-Yeon Park</text>
-    <rect x="72" y="190" width="72" height="4" rx="2" fill="url(#accent)"/>
-    <text x="70" y="234" fill="#cbd5e1" font-size="23" font-weight="500">Efficient representations for retrieval,</text>
-    <text x="70" y="268" fill="#cbd5e1" font-size="23" font-weight="500">remote sensing, and low-bit inference.</text>
-    <text x="70" y="316" fill="#7dd3fc" font-size="15" font-weight="650" letter-spacing="1.2">KOOKMIN UNIVERSITY · SEOUL, SOUTH KOREA</text>
-  </g>
-
-  <g transform="translate(810 52)">
-    <rect x="-24" y="-20" width="342" height="278" rx="28" fill="#071525" fill-opacity="0.62" stroke="#bfdbfe" stroke-opacity="0.12"/>
-
-    <g fill="#19324b" stroke="#93c5fd" stroke-opacity="0.18">
-      <rect x="0" y="0" width="46" height="46" rx="7"/>
-      <rect x="56" y="0" width="46" height="46" rx="7"/>
-      <rect x="112" y="0" width="46" height="46" rx="7"/>
-      <rect x="168" y="0" width="46" height="46" rx="7"/>
-      <rect x="0" y="56" width="46" height="46" rx="7"/>
-      <rect x="56" y="56" width="46" height="46" rx="7" fill="url(#selected)" stroke="#99f6e4" stroke-opacity="0.8"/>
-      <rect x="112" y="56" width="46" height="46" rx="7" fill="url(#selected)" stroke="#99f6e4" stroke-opacity="0.8"/>
-      <rect x="168" y="56" width="46" height="46" rx="7"/>
-      <rect x="0" y="112" width="46" height="46" rx="7"/>
-      <rect x="56" y="112" width="46" height="46" rx="7" fill="url(#selected)" stroke="#99f6e4" stroke-opacity="0.8"/>
-      <rect x="112" y="112" width="46" height="46" rx="7" fill="url(#selected)" stroke="#99f6e4" stroke-opacity="0.8"/>
-      <rect x="168" y="112" width="46" height="46" rx="7"/>
-      <rect x="0" y="168" width="46" height="46" rx="7"/>
-      <rect x="56" y="168" width="46" height="46" rx="7"/>
-      <rect x="112" y="168" width="46" height="46" rx="7"/>
-      <rect x="168" y="168" width="46" height="46" rx="7"/>
+    <g transform="translate(384 56)">
+      <rect width="236" height="32" rx="16" fill="#1b1540" stroke="#a78bfa" stroke-opacity="0.4"/>
+      <circle cx="18" cy="16" r="4" fill="#a78bfa"/>
+      <text x="32" y="21" fill="#ddd6fe" font-size="13" font-weight="700" letter-spacing="1.2">LLM · RAG · AGENTS</text>
     </g>
 
-    <path d="M228 107 H252" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M247 101 L254 107 247 113" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="70" y="160" fill="#f8fafc" font-size="58" font-weight="700">Ki-Yeon Park</text>
+    <rect x="72" y="182" width="72" height="4" rx="2" fill="url(#accent)"/>
+    <text x="70" y="224" fill="#cbd5e1" font-size="22" font-weight="500">Compact representations for retrieval and 2-bit inference,</text>
+    <text x="70" y="256" fill="#cbd5e1" font-size="22" font-weight="500">now shipped as RAG, agent, and serving pipelines.</text>
 
-    <g transform="translate(267 48)">
-      <rect x="0" y="0" width="16" height="118" rx="8" fill="#172e48" stroke="#60a5fa" stroke-opacity="0.28"/>
-      <rect x="0" y="10" width="16" height="20" rx="8" fill="#5eead4" filter="url(#glow)"/>
-      <rect x="0" y="39" width="16" height="14" rx="7" fill="#38bdf8"/>
-      <rect x="0" y="62" width="16" height="25" rx="8" fill="#3b82f6"/>
-      <rect x="0" y="96" width="16" height="12" rx="6" fill="#818cf8"/>
+    <g transform="translate(70 288)" font-size="12" font-weight="700" letter-spacing="1">
+      <rect width="150" height="26" rx="13" fill="#0b2436" stroke="#38bdf8" stroke-opacity="0.35"/>
+      <text x="14" y="17" fill="#7dd3fc">CIKM 2026 · EPTQ</text>
+      <rect x="160" width="196" height="26" rx="13" fill="#0b2436" stroke="#38bdf8" stroke-opacity="0.35"/>
+      <text x="174" y="17" fill="#7dd3fc">IEEE ACCESS · RAP-WEATHER</text>
+      <rect x="366" width="214" height="26" rx="13" fill="#0b2436" stroke="#38bdf8" stroke-opacity="0.35"/>
+      <text x="380" y="17" fill="#7dd3fc">M.S. CS · KOOKMIN UNIVERSITY</text>
+    </g>
+  </g>
+
+  <g transform="translate(700 52)">
+    <rect x="-24" y="-20" width="500" height="278" rx="28" fill="#071525" fill-opacity="0.62" stroke="#bfdbfe" stroke-opacity="0.12"/>
+
+    <g fill="#19324b" stroke="#93c5fd" stroke-opacity="0.18">
+      <rect x="0" y="0" width="40" height="40" rx="7"/>
+      <rect x="48" y="0" width="40" height="40" rx="7"/>
+      <rect x="96" y="0" width="40" height="40" rx="7"/>
+      <rect x="144" y="0" width="40" height="40" rx="7"/>
+      <rect x="0" y="48" width="40" height="40" rx="7"/>
+      <rect x="48" y="48" width="40" height="40" rx="7" fill="url(#selected)" stroke="#99f6e4" stroke-opacity="0.8"/>
+      <rect x="96" y="48" width="40" height="40" rx="7" fill="url(#selected)" stroke="#99f6e4" stroke-opacity="0.8"/>
+      <rect x="144" y="48" width="40" height="40" rx="7"/>
+      <rect x="0" y="96" width="40" height="40" rx="7"/>
+      <rect x="48" y="96" width="40" height="40" rx="7" fill="url(#selected)" stroke="#99f6e4" stroke-opacity="0.8"/>
+      <rect x="96" y="96" width="40" height="40" rx="7" fill="url(#selected)" stroke="#99f6e4" stroke-opacity="0.8"/>
+      <rect x="144" y="96" width="40" height="40" rx="7"/>
+      <rect x="0" y="144" width="40" height="40" rx="7"/>
+      <rect x="48" y="144" width="40" height="40" rx="7"/>
+      <rect x="96" y="144" width="40" height="40" rx="7"/>
+      <rect x="144" y="144" width="40" height="40" rx="7"/>
+    </g>
+
+    <path d="M196 92 H216" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M211 86 L218 92 211 98" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(230 42)">
+      <rect x="0" y="0" width="14" height="100" rx="7" fill="#172e48" stroke="#60a5fa" stroke-opacity="0.28"/>
+      <rect x="0" y="8" width="14" height="18" rx="7" fill="#5eead4" filter="url(#glow)"/>
+      <rect x="0" y="33" width="14" height="12" rx="6" fill="#38bdf8"/>
+      <rect x="0" y="52" width="14" height="22" rx="7" fill="#3b82f6"/>
+      <rect x="0" y="81" width="14" height="12" rx="6" fill="#818cf8"/>
+    </g>
+
+    <line x1="276" y1="-4" x2="276" y2="206" stroke="#bfdbfe" stroke-opacity="0.12"/>
+
+    <g transform="translate(300 0)">
+      <g fill="#243b5a" stroke="#a78bfa" stroke-opacity="0.25">
+        <circle cx="20" cy="20" r="5"/>
+        <circle cx="70" cy="20" r="5"/>
+        <circle cx="120" cy="20" r="5"/>
+        <circle cx="45" cy="56" r="5" fill="url(#violet)" stroke="#ddd6fe" stroke-opacity="0.9"/>
+        <circle cx="95" cy="56" r="5" fill="url(#violet)" stroke="#ddd6fe" stroke-opacity="0.9"/>
+        <circle cx="145" cy="56" r="5"/>
+        <circle cx="20" cy="92" r="5"/>
+        <circle cx="70" cy="92" r="5" fill="url(#violet)" stroke="#ddd6fe" stroke-opacity="0.9"/>
+        <circle cx="120" cy="92" r="5"/>
+        <circle cx="45" cy="128" r="5"/>
+        <circle cx="95" cy="128" r="5" fill="url(#violet)" stroke="#ddd6fe" stroke-opacity="0.9"/>
+        <circle cx="145" cy="128" r="5"/>
+        <circle cx="20" cy="164" r="5"/>
+        <circle cx="70" cy="164" r="5"/>
+        <circle cx="120" cy="164" r="5"/>
+      </g>
+      <g stroke="#a78bfa" stroke-opacity="0.45" stroke-width="1.5" fill="none">
+        <path d="M45 56 L95 56 L70 92 Z"/>
+        <path d="M70 92 L95 128"/>
+      </g>
+      <g transform="translate(16 190)" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1">
+        <rect x="-6" y="-14" width="112" height="22" rx="11" fill="#1b1540" stroke="#a78bfa" stroke-opacity="0.4"/>
+        <text x="6" y="1" fill="#ddd6fe">2-BIT · E8 LATTICE</text>
+      </g>
     </g>
 
     <g font-family="Inter, Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1">
-      <text x="0" y="239" fill="#94a3b8">PATCH GRID</text>
-      <text x="171" y="239" fill="#94a3b8">REGION</text>
-      <text x="254" y="239" fill="#7dd3fc">D=8</text>
+      <text x="0" y="221" fill="#94a3b8">PATCH GRID</text>
+      <text x="150" y="221" fill="#94a3b8">REGION</text>
+      <text x="224" y="221" fill="#7dd3fc">D=8</text>
     </g>
   </g>
 </svg>
