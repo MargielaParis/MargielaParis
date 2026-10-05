@@ -164,8 +164,8 @@ drift-aware retraining.
 **Languages & credentials** · OPIc IH (May 2026) · TOEIC 915 (Nov 2023)
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=MargielaParis&show_icons=true&hide_border=true&theme=tokyonight&bg_color=0b1930&title_color=5eead4&icon_color=60a5fa&text_color=cbd5e1&hide=stars,issues&count_private=true" height="160" alt="GitHub stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MargielaParis&layout=compact&hide_border=true&theme=tokyonight&bg_color=0b1930&title_color=5eead4&text_color=cbd5e1&langs_count=6" height="160" alt="Top languages" />
+  <img src="https://github-readme-stats.vercel.app/api?username=MargielaParis&show_icons=true&hide_border=true&theme=tokyonight&bg_color=0b1930&title_color=5eead4&icon_color=60a5fa&text_color=cbd5e1&hide=stars,issues" height="160" alt="GitHub stats" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=MargielaParis&layout=compact&hide_border=true&theme=tokyonight&bg_color=0b1930&title_color=5eead4&text_color=cbd5e1&langs_count=6&hide=html,css" height="160" alt="Top languages" />
 </p>
 
 <p align="center">
