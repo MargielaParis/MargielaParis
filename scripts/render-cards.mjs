@@ -1,4 +1,4 @@
-// Renders assets/hero.svg and assets/stats.svg with embedded subset fonts.
+// Renders assets/banner.svg and assets/activity.svg with embedded subset fonts.
 // Usage: GITHUB_TOKEN=... node scripts/render-cards.mjs [--hero-only]
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -204,7 +204,7 @@ ${bars}`;
   return frame(1000, 290, 'GitHub activity for MargielaParis', body);
 }
 
-writeFileSync(asset('hero.svg'), hero());
+writeFileSync(asset('banner.svg'), hero());
 if (!process.argv.includes('--hero-only')) {
-  writeFileSync(asset('stats.svg'), stats(await fetchStats()));
+  writeFileSync(asset('activity.svg'), stats(await fetchStats()));
 }
