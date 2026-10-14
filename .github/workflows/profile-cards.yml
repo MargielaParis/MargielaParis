@@ -1,0 +1,39 @@
+name: Refresh profile cards
+
+on:
+  schedule:
+    - cron: '17 21 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/render-cards.mjs
+      - assets/fonts/**
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-cards
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Render SVG cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN || github.token }}
+        run: node scripts/render-cards.mjs
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- assets; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/hero.svg assets/stats.svg
+          git commit -m '🍱 assets: Refresh profile cards'
+          git push
