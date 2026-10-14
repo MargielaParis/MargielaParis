@@ -1,5 +1,5 @@
 // Renders assets/banner.svg and assets/activity.svg with embedded subset fonts.
-// Usage: GITHUB_TOKEN=... node scripts/render-cards.mjs [--hero-only]
+// Usage: GITHUB_TOKEN=... node scripts/render-cards.mjs [--hero-only] [--theme=paper|graphite]
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -8,87 +8,135 @@ const LOGIN = 'MargielaParis';
 const HIDDEN_LANGS = new Set(['HTML', 'CSS', 'SCSS']);
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const asset = (...p) => join(root, 'assets', ...p);
+const arg = (name, fallback) => (process.argv.find((a) => a.startsWith(`--${name}=`)) || '').split('=')[1] || fallback;
 
-const font = (file) => readFileSync(asset('fonts', file)).toString('base64');
+const THEMES = {
+  paper: {
+    bg: '#f6f4ee', border: '#e4e0d5', ink: '#14161a', body: '#3f4450', muted: '#8a8f99',
+    rule: '#14161a', ruleOp: 0.1, card: '#eeebe2', accent: '#0f766e', accent2: '#4f46e5', track: '#e6e2d8',
+    bar: ['#14b8a6', '#4f46e5'],
+    weights: ['#1e3a8a', '#60a5fa', '#e8e6df', '#f59e0b', '#9a3412'],
+  },
+  graphite: {
+    bg: '#141518', border: '#26282d', ink: '#f4f4f5', body: '#a1a1aa', muted: '#71717a',
+    rule: '#ffffff', ruleOp: 0.09, card: '#1b1c20', accent: '#5eead4', accent2: '#a5b4fc', track: '#26282d',
+    bar: ['#2dd4bf', '#818cf8'],
+    weights: ['#1d4ed8', '#60a5fa', '#3f3f46', '#fbbf24', '#ea580c'],
+  },
+};
+const T = THEMES[arg('theme', 'paper')];
+
+const b64 = (file) => readFileSync(asset(file)).toString('base64');
 const STYLE = `<style>
-@font-face{font-family:PSans;src:url(data:font/woff2;base64,${font('inter.woff2')}) format('woff2');font-weight:400 800}
-@font-face{font-family:PMono;src:url(data:font/woff2;base64,${font('mono.woff2')}) format('woff2');font-weight:400 700}
+@font-face{font-family:PSans;src:url(data:font/woff2;base64,${b64('fonts/inter.woff2')}) format('woff2');font-weight:400 800}
+@font-face{font-family:PMono;src:url(data:font/woff2;base64,${b64('fonts/mono.woff2')}) format('woff2');font-weight:400 700}
 .s{font-family:PSans,'Segoe UI',Helvetica,Arial,sans-serif}
 .m{font-family:PMono,ui-monospace,Menlo,Consolas,monospace}
 .tn{font-variant-numeric:tabular-nums}
 </style>`;
 
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const label = (x, y, text, fill = T.muted, anchor = 'start') =>
+  `<text x="${x}" y="${y}" text-anchor="${anchor}" class="m" font-size="12" font-weight="500" letter-spacing="1.4" fill="${fill}">${text}</text>`;
 
 function frame(w, h, title, body) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title)}">
 <title>${esc(title)}</title>
 ${STYLE}
 <defs>
-  <radialGradient id="glowA" cx="0.88" cy="0.05" r="0.6"><stop offset="0" stop-color="#14b8a6" stop-opacity="0.22"/><stop offset="1" stop-color="#14b8a6" stop-opacity="0"/></radialGradient>
-  <radialGradient id="glowB" cx="0.08" cy="1.1" r="0.7"><stop offset="0" stop-color="#7c3aed" stop-opacity="0.2"/><stop offset="1" stop-color="#7c3aed" stop-opacity="0"/></radialGradient>
-  <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
-  <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
-  <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#94a3b8" fill-opacity="0.07"/></pattern>
-  <clipPath id="card"><rect width="${w}" height="${h}" rx="20"/></clipPath>
+  <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="${T.bar[0]}"/><stop offset="1" stop-color="${T.bar[1]}"/></linearGradient>
 </defs>
-<g clip-path="url(#card)">
-  <rect width="${w}" height="${h}" fill="#0a0f1d"/>
-  <rect width="${w}" height="${h}" fill="url(#dots)"/>
-  <rect width="${w}" height="${h}" fill="url(#glowA)"/>
-  <rect width="${w}" height="${h}" fill="url(#glowB)"/>
-</g>
-<rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="19.5" fill="none" stroke="#e2e8f0" stroke-opacity="0.08"/>
+<rect x="0.5" y="0.5" width="${w - 1}" height="${h - 1}" rx="18" fill="${T.bg}" stroke="${T.border}"/>
 ${body}
 </svg>
 `;
 }
 
+// Smooth weight field so FP16 reads as a gradient and 2-bit as four bands.
+function weights(cols, rows) {
+  return Array.from({ length: cols * rows }, (_, i) => {
+    const c = i % cols, r = Math.floor(i / cols);
+    return 0.92 * Math.sin(c * 0.52 + r * 0.9 - 0.6) * Math.cos(c * 0.12 - r * 0.35);
+  });
+}
+
+function mix(a, b, t) {
+  const p = (c) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16));
+  const [x, y] = [p(a), p(b)];
+  return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join('');
+}
+function ramp(v) {
+  const stops = T.weights, t = ((v + 1) / 2) * (stops.length - 1);
+  const i = Math.min(Math.floor(t), stops.length - 2);
+  return mix(stops[i], stops[i + 1], t - i);
+}
+
 function hero() {
-  const facts = [
-    ['CIKM 2026', 'EPTQ, 2-bit PTQ'],
-    ['IEEE ACCESS', 'RaP-Weather'],
-    ['NOW', 'SKALA 4th cohort'],
-  ];
+  const facts = [['CIKM 2026', 'EPTQ, 2-bit PTQ'], ['IEEE ACCESS', 'RaP-Weather'], ['NOW', 'SKALA 4th cohort']];
   const factSvg = facts.map(([k, v], i) => {
-    const x = 56 + i * 164;
-    const sep = i ? `<line x1="${x - 18}" y1="246" x2="${x - 18}" y2="284" stroke="#e2e8f0" stroke-opacity="0.12"/>` : '';
-    return `${sep}<text x="${x}" y="258" class="m" font-size="11" font-weight="500" letter-spacing="1.5" fill="#64748b">${k}</text>
-<text x="${x}" y="281" class="s" font-size="15" font-weight="600" fill="#e2e8f0">${esc(v)}</text>`;
+    const x = 48 + i * 150;
+    const sep = i ? `<line x1="${x - 16}" y1="272" x2="${x - 16}" y2="312" stroke="${T.rule}" stroke-opacity="${T.ruleOp}"/>` : '';
+    return `${sep}${label(x, 286, k)}
+<text x="${x}" y="308" class="s" font-size="15" font-weight="600" fill="${T.ink}">${esc(v)}</text>`;
   }).join('\n');
 
-  const cols = 9, rows = 7, cell = 26, gap = 8, gx = 646, gy = 44;
-  const sel = (c, r) => c >= 4 && c <= 6 && r >= 2 && r <= 3;
-  const cells = [];
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const x = gx + c * (cell + gap), y = gy + r * (cell + gap);
-      if (sel(c, r)) {
-        cells.push(`<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="6" fill="url(#accent)"/>`);
-        continue;
-      }
-      const heat = Math.exp(-(((c - 5) ** 2) / 10 + ((r - 2.5) ** 2) / 6)) + 0.6 * Math.exp(-(((c - 1) ** 2) / 4 + ((r - 5.5) ** 2) / 3));
-      const op = (0.07 + 0.38 * Math.min(heat, 1)).toFixed(2);
-      cells.push(`<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="6" fill="#60a5fa" fill-opacity="${op}"/>`);
-    }
-  }
-  const sx = gx + 4 * (cell + gap) - 6, sy = gy + 2 * (cell + gap) - 6;
-  const sw = 3 * cell + 2 * gap + 12, sh = 2 * cell + gap + 12;
-  const region = `<rect x="${sx}" y="${sy}" width="${sw}" height="${sh}" rx="10" fill="none" stroke="#99f6e4" stroke-width="1.5" stroke-dasharray="4 4"/>
-<rect x="${sx}" y="${sy - 26}" width="104" height="20" rx="6" fill="#0f2f2c" stroke="#5eead4" stroke-opacity="0.5"/>
-<text x="${sx + 52}" y="${sy - 12}" text-anchor="middle" class="m" font-size="10" font-weight="700" letter-spacing="1.2" fill="#99f6e4">REGION QUERY</text>`;
+  const left = `<rect x="48" y="62" width="22" height="3" rx="1.5" fill="${T.accent}"/>
+${label(80, 68, 'ML RESEARCHER / AI ENGINEER', T.accent)}
+<text x="46" y="128" class="s" font-size="54" font-weight="700" letter-spacing="-1.6" fill="${T.ink}">Ki-Yeon Park</text>
+<text x="48" y="170" class="s" font-size="18" fill="${T.body}">Compact representations for retrieval and 2-bit</text>
+<text x="48" y="195" class="s" font-size="18" fill="${T.body}">inference, now shipped as RAG and agent services.</text>
+${factSvg}`;
 
-  const body = `<g>
-<rect x="56" y="76" width="24" height="3" rx="1.5" fill="url(#accent)"/>
-<text x="92" y="82" class="m" font-size="13" font-weight="500" letter-spacing="2" fill="#5eead4">ML RESEARCHER / AI ENGINEER</text>
-<text x="54" y="146" class="s" font-size="58" font-weight="700" letter-spacing="-1.5" fill="#f8fafc">Ki-Yeon Park</text>
-<text x="56" y="190" class="s" font-size="19" fill="#94a3b8">Compact representations for retrieval and 2-bit</text>
-<text x="56" y="216" class="s" font-size="19" fill="#94a3b8">inference, now shipped as RAG and agent services.</text>
-${factSvg}
+  // Panel A: satellite image cut into patches, one region selected.
+  const ax = 508, ay = 40, size = 220, n = 5, p = size / n;
+  const sel = (c, r) => c >= 2 && c <= 3 && r >= 1 && r <= 2;
+  let shade = '', grid = '';
+  for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+    if (!sel(c, r)) shade += `<rect x="${ax + c * p}" y="${ay + r * p}" width="${p}" height="${p}" fill="#05070c" fill-opacity="0.22"/>`;
+  }
+  for (let i = 1; i < n; i++) {
+    grid += `<line x1="${ax + i * p}" y1="${ay}" x2="${ax + i * p}" y2="${ay + size}"/><line x1="${ax}" y1="${ay + i * p}" x2="${ax + size}" y2="${ay + i * p}"/>`;
+  }
+  const panelA = `<rect x="${ax - 16}" y="24" width="${size + 32}" height="300" rx="14" fill="${T.card}" stroke="${T.border}"/>
+<clipPath id="sat"><rect x="${ax}" y="${ay}" width="${size}" height="${size}" rx="10"/></clipPath>
+<g clip-path="url(#sat)">
+  <image href="data:image/jpeg;base64,${b64('satellite.jpg')}" x="${ax + 3 * p - 0.56 * 330}" y="${ay + 2 * p - 0.47 * 330}" width="330" height="330"/>
+  ${shade}
+  <g stroke="#ffffff" stroke-opacity="0.28" stroke-width="1">${grid}</g>
 </g>
-<g>${cells.join('')}</g>
-${region}`;
-  return frame(1000, 320, 'Ki-Yeon Park, ML researcher and AI engineer', body);
+<rect x="${ax + 2 * p}" y="${ay + p}" width="${2 * p}" height="${2 * p}" rx="3" fill="none" stroke="#5eead4" stroke-width="2.5"/>
+<rect x="${ax + 2 * p + 6}" y="${ay + p + 6}" width="58" height="18" rx="4" fill="#0b1220" fill-opacity="0.85"/>
+<text x="${ax + 2 * p + 35}" y="${ay + p + 19}" text-anchor="middle" class="m" font-size="10" font-weight="700" letter-spacing="1" fill="#5eead4">QUERY</text>
+${label(ax, 286, 'RAP-WEATHER')}
+<text x="${ax}" y="308" class="s" font-size="15" font-weight="600" fill="${T.ink}">Patch grid, region query</text>`;
+
+  // Panel B: full-precision weights quantized to four 2-bit levels.
+  const bx = 765, cols = 12, rows = 4, cell = 14, gap = 2;
+  const w = weights(cols, rows);
+  const levels = [-0.75, -0.25, 0.25, 0.75];
+  const q = (v) => levels.reduce((a, b) => (Math.abs(b - v) < Math.abs(a - v) ? b : a));
+  const matrix = (y0, f) => w.map((v, i) => {
+    const x = bx + (i % cols) * (cell + gap), y = y0 + Math.floor(i / cols) * (cell + gap);
+    return `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="2.5" fill="${ramp(f(v))}"/>`;
+  }).join('');
+  const mw = cols * cell + (cols - 1) * gap, mh = rows * cell + (rows - 1) * gap;
+  const top = 58, bottom = top + mh + 44;
+  const codes = ['00', '01', '10', '11'].map((code, i) => {
+    const x = bx + i * 48;
+    return `<rect x="${x}" y="${bottom + mh + 14}" width="12" height="12" rx="2" fill="${ramp(levels[i])}"/>
+<text x="${x + 18}" y="${bottom + mh + 24}" class="m" font-size="11" fill="${T.muted}">${code}</text>`;
+  }).join('');
+  const panelB = `<rect x="${bx - 15}" y="24" width="${mw + 30}" height="300" rx="14" fill="${T.card}" stroke="${T.border}"/>
+${matrix(top, (v) => v)}
+<text x="${bx}" y="${top + mh + 28}" class="m" font-size="11" font-weight="500" letter-spacing="1" fill="${T.muted}">FP16</text>
+<path d="M${bx + mw / 2} ${top + mh + 12} v16 m-5 -5 l5 5 l5 -5" fill="none" stroke="${T.accent2}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="${bx + mw}" y="${top + mh + 28}" text-anchor="end" class="m" font-size="11" font-weight="700" letter-spacing="1" fill="${T.accent2}">2-BIT</text>
+${matrix(bottom, q)}
+${codes}
+${label(bx, 286, 'EPTQ')}
+<text x="${bx}" y="308" class="s" font-size="15" font-weight="600" fill="${T.ink}">2-bit weights, E8 lattice</text>`;
+
+  return frame(1000, 340, 'Ki-Yeon Park, ML researcher and AI engineer', `${left}\n${panelA}\n${panelB}`);
 }
 
 async function gql(query, variables) {
@@ -148,36 +196,36 @@ async function fetchStats() {
 
 function stats({ metrics, langs, weeks }) {
   const today = new Date().toISOString().slice(0, 10);
-  const head = `<text x="56" y="52" class="m" font-size="12" font-weight="700" letter-spacing="2" fill="#5eead4">GITHUB ACTIVITY<tspan fill="#64748b" font-weight="500"> / LAST 12 MONTHS</tspan></text>
-<text x="944" y="52" text-anchor="end" class="m" font-size="11" letter-spacing="1.2" fill="#475569">UPDATED ${today}</text>`;
+  const head = `${label(48, 52, 'GITHUB ACTIVITY', T.accent)}
+${label(952, 52, `LAST 12 MONTHS / ${today}`, T.muted, 'end')}`;
 
-  const metricSvg = metrics.map(([label, value], i) => {
-    const x = 56 + i * 112;
-    return `<text x="${x}" y="120" class="s tn" font-size="36" font-weight="700" letter-spacing="-0.5" fill="#f8fafc">${value.toLocaleString('en-US')}</text>
-<text x="${x}" y="144" class="m" font-size="11" font-weight="500" letter-spacing="1.2" fill="#64748b">${label}</text>`;
+  const metricSvg = metrics.map(([name, value], i) => {
+    const x = 48 + i * 112;
+    return `<text x="${x}" y="122" class="s tn" font-size="38" font-weight="700" letter-spacing="-0.8" fill="${T.ink}">${value.toLocaleString('en-US')}</text>
+${label(x, 148, name)}`;
   }).join('\n');
 
-  const lx = 552, lw = 392;
+  const lx = 532, lw = 420;
   let acc = 0;
   const sum = langs.reduce((a, l) => a + l.pct, 0) || 1;
   const segs = langs.map((l) => {
     const w = (l.pct / sum) * lw;
-    const s = `<rect x="${(lx + acc).toFixed(1)}" y="96" width="${Math.max(w - 2, 1).toFixed(1)}" height="8" fill="${l.color}"/>`;
+    const s = `<rect x="${(lx + acc).toFixed(1)}" y="88" width="${Math.max(w - 2, 1).toFixed(1)}" height="10" fill="${l.color}"/>`;
     acc += w;
     return s;
   }).join('');
   const legend = langs.map((l, i) => {
-    const x = lx + (i % 3) * 136, y = 134 + Math.floor(i / 3) * 24;
-    return `<circle cx="${x + 4}" cy="${y - 4.5}" r="4" fill="${l.color}"/>
-<text x="${x + 16}" y="${y}" class="s" font-size="13" font-weight="500" fill="#cbd5e1">${esc(l.name)}<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">${l.pct.toFixed(1)}%</tspan></text>`;
+    const x = lx + (i % 3) * 142, y = 128 + Math.floor(i / 3) * 24;
+    return `<circle cx="${x + 5}" cy="${y - 5}" r="5" fill="${l.color}"/>
+<text x="${x + 17}" y="${y}" class="s" font-size="14" font-weight="500" fill="${T.ink}">${esc(l.name)}<tspan dx="7" class="m tn" font-size="12" font-weight="400" fill="${T.muted}">${l.pct.toFixed(1)}%</tspan></text>`;
   }).join('\n');
-  const langSvg = `<text x="${lx}" y="80" class="m" font-size="11" font-weight="500" letter-spacing="1.2" fill="#64748b">LANGUAGES</text>
-<clipPath id="langbar"><rect x="${lx}" y="96" width="${lw}" height="8" rx="4"/></clipPath>
-<rect x="${lx}" y="96" width="${lw}" height="8" rx="4" fill="#1e293b"/>
+  const langSvg = `${label(lx, 76, 'LANGUAGES')}
+<clipPath id="langbar"><rect x="${lx}" y="88" width="${lw}" height="10" rx="5"/></clipPath>
+<rect x="${lx}" y="88" width="${lw}" height="10" rx="5" fill="${T.track}"/>
 <g clip-path="url(#langbar)">${segs}</g>
 ${legend}`;
 
-  const bx = 56, bw = 888, base = 248, maxH = 52;
+  const bx = 48, bw = 904, base = 256, maxH = 54;
   const step = bw / weeks.length;
   const max = Math.max(1, ...weeks.map((w) => w.count));
   const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -185,26 +233,25 @@ ${legend}`;
   const bars = weeks.map((w, i) => {
     const x = bx + i * step + 2;
     const h = w.count ? Math.max(3, (w.count / max) * maxH) : 3;
-    const fill = w.count ? 'url(#bar)' : '#1e293b';
-    let label = '';
+    const fill = w.count ? 'url(#bar)' : T.track;
+    let mark = '';
     const m = new Date(w.firstDay).getUTCMonth();
-    if (m !== lastMonth && i > 0 && i < weeks.length - 2) {
-      label = `<text x="${x}" y="${base + 20}" class="m" font-size="10" letter-spacing="1" fill="#475569">${months[m]}</text>`;
-    }
+    if (m !== lastMonth && i > 0 && i < weeks.length - 2) mark = label(x, base + 22, months[m]);
     lastMonth = m;
-    return `<rect x="${x.toFixed(1)}" y="${(base - h).toFixed(1)}" width="${(step - 4).toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="${fill}"/>${label}`;
+    return `<rect x="${x.toFixed(1)}" y="${(base - h).toFixed(1)}" width="${(step - 4).toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="${fill}"/>${mark}`;
   }).join('\n');
 
   const body = `${head}
 ${metricSvg}
-<line x1="520" y1="72" x2="520" y2="160" stroke="#e2e8f0" stroke-opacity="0.1"/>
+<line x1="500" y1="70" x2="500" y2="156" stroke="${T.rule}" stroke-opacity="${T.ruleOp}"/>
 ${langSvg}
-<line x1="56" y1="180" x2="944" y2="180" stroke="#e2e8f0" stroke-opacity="0.06"/>
+<line x1="48" y1="180" x2="952" y2="180" stroke="${T.rule}" stroke-opacity="${T.ruleOp}"/>
 ${bars}`;
-  return frame(1000, 290, 'GitHub activity for MargielaParis', body);
+  return frame(1000, 300, 'GitHub activity for MargielaParis', body);
 }
 
-writeFileSync(asset('banner.svg'), hero());
+const out = arg('out', '');
+writeFileSync(asset(`banner${out}.svg`), hero());
 if (!process.argv.includes('--hero-only')) {
-  writeFileSync(asset('activity.svg'), stats(await fetchStats()));
+  writeFileSync(asset(`activity${out}.svg`), stats(await fetchStats()));
 }
