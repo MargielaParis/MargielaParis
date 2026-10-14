@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/hero.svg" width="100%" alt="Ki-Yeon Park — Machine Learning Researcher and AI Engineer" />
+  <img src="./assets/banner.svg" width="100%" alt="Ki-Yeon Park — Machine Learning Researcher and AI Engineer" />
 </p>
 
 <p align="center">
@@ -164,7 +164,7 @@ drift-aware retraining.
 **Languages & credentials** · OPIc IH (May 2026) · TOEIC 915 (Nov 2023)
 
 <p align="center">
-  <img src="./assets/stats.svg" width="100%" alt="GitHub activity, top languages, and weekly contributions" />
+  <img src="./assets/activity.svg" width="100%" alt="GitHub activity, top languages, and weekly contributions" />
 </p>
 
 <p align="center">
