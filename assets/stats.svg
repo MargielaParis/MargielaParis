@@ -26,7 +26,7 @@
 <text x="944" y="52" text-anchor="end" class="m" font-size="11" letter-spacing="1.2" fill="#475569">UPDATED 2026-10-14</text>
 <text x="56" y="120" class="s tn" font-size="36" font-weight="700" letter-spacing="-0.5" fill="#f8fafc">72</text>
 <text x="56" y="144" class="m" font-size="11" font-weight="500" letter-spacing="1.2" fill="#64748b">COMMITS</text>
-<text x="168" y="120" class="s tn" font-size="36" font-weight="700" letter-spacing="-0.5" fill="#f8fafc">43</text>
+<text x="168" y="120" class="s tn" font-size="36" font-weight="700" letter-spacing="-0.5" fill="#f8fafc">44</text>
 <text x="168" y="144" class="m" font-size="11" font-weight="500" letter-spacing="1.2" fill="#64748b">PULL REQS</text>
 <text x="280" y="120" class="s tn" font-size="36" font-weight="700" letter-spacing="-0.5" fill="#f8fafc">5</text>
 <text x="280" y="144" class="m" font-size="11" font-weight="500" letter-spacing="1.2" fill="#64748b">REVIEWS</text>
@@ -36,19 +36,19 @@
 <text x="552" y="80" class="m" font-size="11" font-weight="500" letter-spacing="1.2" fill="#64748b">LANGUAGES</text>
 <clipPath id="langbar"><rect x="552" y="96" width="392" height="8" rx="4"/></clipPath>
 <rect x="552" y="96" width="392" height="8" rx="4" fill="#1e293b"/>
-<g clip-path="url(#langbar)"><rect x="552.0" y="96" width="135.6" height="8" fill="#f1e05a"/><rect x="689.6" y="96" width="78.3" height="8" fill="#41b883"/><rect x="769.8" y="96" width="67.4" height="8" fill="#3572A5"/><rect x="839.3" y="96" width="66.9" height="8" fill="#3178c6"/><rect x="908.2" y="96" width="25.2" height="8" fill="#b07219"/><rect x="935.4" y="96" width="6.6" height="8" fill="#f34b7d"/></g>
+<g clip-path="url(#langbar)"><rect x="552.0" y="96" width="138.4" height="8" fill="#f1e05a"/><rect x="692.4" y="96" width="77.4" height="8" fill="#41b883"/><rect x="771.8" y="96" width="66.7" height="8" fill="#3572A5"/><rect x="840.4" y="96" width="66.1" height="8" fill="#3178c6"/><rect x="908.6" y="96" width="24.9" height="8" fill="#b07219"/><rect x="935.5" y="96" width="6.5" height="8" fill="#f34b7d"/></g>
 <circle cx="556" cy="129.5" r="4" fill="#f1e05a"/>
-<text x="568" y="134" class="s" font-size="13" font-weight="500" fill="#cbd5e1">JavaScript<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">34.6%</tspan></text>
+<text x="568" y="134" class="s" font-size="13" font-weight="500" fill="#cbd5e1">JavaScript<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">35.3%</tspan></text>
 <circle cx="692" cy="129.5" r="4" fill="#41b883"/>
-<text x="704" y="134" class="s" font-size="13" font-weight="500" fill="#cbd5e1">Vue<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">20.2%</tspan></text>
+<text x="704" y="134" class="s" font-size="13" font-weight="500" fill="#cbd5e1">Vue<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">19.9%</tspan></text>
 <circle cx="828" cy="129.5" r="4" fill="#3572A5"/>
-<text x="840" y="134" class="s" font-size="13" font-weight="500" fill="#cbd5e1">Python<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">17.4%</tspan></text>
+<text x="840" y="134" class="s" font-size="13" font-weight="500" fill="#cbd5e1">Python<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">17.2%</tspan></text>
 <circle cx="556" cy="153.5" r="4" fill="#3178c6"/>
-<text x="568" y="158" class="s" font-size="13" font-weight="500" fill="#cbd5e1">TypeScript<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">17.3%</tspan></text>
+<text x="568" y="158" class="s" font-size="13" font-weight="500" fill="#cbd5e1">TypeScript<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">17.1%</tspan></text>
 <circle cx="692" cy="153.5" r="4" fill="#b07219"/>
 <text x="704" y="158" class="s" font-size="13" font-weight="500" fill="#cbd5e1">Java<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">6.8%</tspan></text>
 <circle cx="828" cy="153.5" r="4" fill="#f34b7d"/>
-<text x="840" y="158" class="s" font-size="13" font-weight="500" fill="#cbd5e1">C++<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">2.2%</tspan></text>
+<text x="840" y="158" class="s" font-size="13" font-weight="500" fill="#cbd5e1">C++<tspan dx="7" class="m tn" font-size="11.5" font-weight="400" fill="#64748b">2.1%</tspan></text>
 <line x1="56" y1="180" x2="944" y2="180" stroke="#e2e8f0" stroke-opacity="0.06"/>
 <rect x="58.0" y="245.0" width="12.8" height="3.0" rx="2" fill="#1e293b"/>
 <rect x="74.8" y="245.0" width="12.8" height="3.0" rx="2" fill="#1e293b"/>
@@ -102,5 +102,5 @@
 <rect x="879.0" y="227.7" width="12.8" height="20.3" rx="2" fill="url(#bar)"/>
 <rect x="895.7" y="236.2" width="12.8" height="11.8" rx="2" fill="url(#bar)"/>
 <rect x="912.5" y="212.2" width="12.8" height="35.8" rx="2" fill="url(#bar)"/>
-<rect x="929.2" y="238.2" width="12.8" height="9.8" rx="2" fill="url(#bar)"/>
+<rect x="929.2" y="237.5" width="12.8" height="10.5" rx="2" fill="url(#bar)"/>
 </svg>
