@@ -5,6 +5,7 @@
 <p align="center">
   <a href="mailto:kiyeon9610@gmail.com"><img src="https://img.shields.io/badge/Email-kiyeon9610%40gmail.com-0f172a?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
   <a href="https://github.com/kmudmlab/eptq"><img src="https://img.shields.io/badge/EPTQ-CIKM_2026-7c3aed?style=flat-square&logo=github&logoColor=white" alt="EPTQ on GitHub" /></a>
+  <img src="https://img.shields.io/badge/RaP--Weather-IEEE_Access-1e3a8a?style=flat-square" alt="RaP-Weather, IEEE Access" />
   <img src="https://img.shields.io/badge/Seoul-South_Korea-0f766e?style=flat-square" alt="Seoul, South Korea" />
 </p>
 
@@ -21,7 +22,7 @@ drift-aware retraining.
     <td width="50%" valign="top">
       <b>Research</b>
       <ul>
-        <li>First author · region-aware satellite retrieval (RaP-Weather)</li>
+        <li>First author · region-aware satellite retrieval (RaP-Weather, IEEE Access 2026)</li>
         <li>Co-author · 2-bit post-training quantization for LLMs (EPTQ, CIKM 2026)</li>
         <li>Interests: image embeddings, self-supervised learning, model compression, efficient inference</li>
       </ul>
@@ -45,7 +46,7 @@ drift-aware retraining.
       <h3>RaP-Weather · region-aware satellite retrieval</h3>
       <p>
         <img src="https://img.shields.io/badge/First_author-172554?style=flat-square" alt="First author" />
-        <img src="https://img.shields.io/badge/IEEE_Access-under_revision-1e3a8a?style=flat-square" alt="IEEE Access, under revision" />
+        <img src="https://img.shields.io/badge/IEEE_Access-accepted-1e3a8a?style=flat-square" alt="IEEE Access, accepted" />
       </p>
       <p>
         Encodes a full satellite image sequence once, keeps a compact patch grid,
