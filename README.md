@@ -90,7 +90,7 @@ drift-aware retraining.
 |---|---|---|
 | **EventHub** <sub>SKALA team</sub> | Event-platform MSA with five services and Kafka; personalized recommendation that stacks collaborative-filtering KNN with an MLP to cover cold start (Hit@10 0.396 → 0.600) | Java, Spring Boot, JPA, Kafka, MariaDB, Python |
 | **KV-cache optimization review agent** <sub>SKALA team</sub> | LangGraph pipeline of 10 agents that evaluates KV-cache optimization techniques from four perspectives; three RAG agents benchmarked across chunking, embeddings (bge-m3, e5, Qwen3-Embedding), and query rewriting | Python, LangGraph, LangChain, Vector DB, RAGAS |
-| **TSA checkpoint forecasting** <sub>SKALA mini</sub> | FastAPI serving with an MLflow deployment gate, RMSE drift detection, warm-start retraining, and rule-based safe mode; cut service RMSE by 72.7% versus a static model during the COVID-19 collapse | Python, FastAPI, MLflow, LSTM, gradient boosting |
+| **TSA checkpoint forecasting** <sub>SKALA mini</sub> | FastAPI serving with an MLflow deployment gate, RMSE drift detection, warm-start retraining, and rule-based safe mode; cut service RMSE by 72.7% versus a static model during the COVID-19 collapse | Python, FastAPI, MLflow, LSTM, gradient boosting, Docker |
 | [**Zhang et al.**](https://github.com/MargielaParis/zhang-et-al) <sub>SKALA solo</sub> | Research-topic reader that finds overlapping prior work by embedding search over 10,326 papers; requirements, UI flow, OpenAPI, and ERD design | Service design, OpenAPI, DBML |
 | [**KBO Schedule API**](https://github.com/MargielaParis/Doosan-Schedule) | Automated collection and delivery of structured game schedules through a weekly GitHub Actions workflow and GitHub Pages | Python, JSON, GitHub Actions |
 | [**Front-end Systems Lab**](https://github.com/MargielaParis/skala-front) | Responsive vanilla web portal with modular weather API integration and progressive HTML/CSS/JavaScript exercises | HTML, CSS, JavaScript, Open-Meteo |
@@ -151,11 +151,18 @@ drift-aware retraining.
   <img src="https://img.shields.io/badge/LaTeX-008080?style=flat-square&logo=latex&logoColor=white" alt="LaTeX" />
 </p>
 
+**Familiar**
+
+<p>
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white" alt="Kubernetes" />
+</p>
+
 ## Experience & Education
 
 | Period | Organization | Role |
 |---|---|---|
-| **Jul 2026 – Dec 2026** | **SKALA 4th cohort** | Full-stack AI service training: Python, Java/Spring Boot, Vue.js, MSA, LangChain/LangGraph, RAG, agents, MLflow-based serving and AIOps |
+| **Jul 2026 – Dec 2026** | **SKALA 4th cohort** | Full-stack AI service training: Python, Java/Spring Boot, Vue.js, Docker, Kubernetes, MSA, LangChain/LangGraph, RAG, agents, MLflow-based serving and AIOps |
 | Aug 2023 – Feb 2026 | **Data Mining Lab, Kookmin University** | Undergraduate researcher, then M.S. researcher; satellite-image retrieval and LLM quantization |
 | Mar 2024 – Feb 2026 | **Kookmin University** | M.S. in Computer Science · GPA 4.39/4.50 |
 | Mar 2016 – Feb 2024 | **Kookmin University** | B.A. in Political Science & Diplomacy and B.S. in Computer Science (double major) |
